@@ -8,17 +8,21 @@ version: '1.1'
 services:
 
   db:
-    image: postgres
+    image: mysql:latest
     restart: always
     ports:
-      - "5432:5432"
+      - "3306:3306"
     environment:
-      POSTGRES_USER: gonzalezj
-      POSTGRES_PASSWORD: Jesus556
-      POSTGRES_DB: Prueba
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: Prueba
+      MYSQL_USER: gonzalezj
+      MYSQL_PASSWORD: Jesus556
 
-  adminer:
-    image: adminer
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
     restart: always
     ports:
-      - 8080:8080
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
